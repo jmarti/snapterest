@@ -4,26 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://jmarti@github.com/jmarti/snapterest.git"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jmarti/snapterest/issues"
-  },
-  "homepage": "https://github.com/jmarti/snapterest#readme",
   "devDependencies": {
-    "babelify": "^6.4.0",
-    "browserify": "^13.1.1",
-    "gulp": "^3.9.1",
+    "babel-jest": "^6.0.1",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^6.2.0",
+    "browserify": "^11.0.1",
+    "gulp": "^3.9.0",
+    "jest-cli": "^0.8.2",
+    "react-addons-test-utils": "^0.14.8",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "react": "^0.14.0-beta3",
-    "react-dom": "^0.14.0-beta3"
+    "react-dom": "^0.14.0-beta3",
+    "snapkite-stream-client": "^1.0.3"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils"
+    ]
   }
 }
