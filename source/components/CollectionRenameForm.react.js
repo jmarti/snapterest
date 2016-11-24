@@ -1,6 +1,8 @@
 var React = require('react');
 var Header = require('./Header.react');
 var Button = require('./Button.react');
+var CollectionActionCreators = require('../actions/CollectionActionCreators');
+var CollectionStore = require('../stores/CollectionStore');
 
 var inputStyle = {
   marginRight: '5px'
@@ -10,39 +12,42 @@ var CollectionRenameForm = React.createClass({
   
   getInitialState: function() {
     return {
-      inputValue: this.props.name
+      inputValue: CollectionStore.getCollectionName()
     };
   },
 
-  setInputValue: function (inputValue) {
+  setInputValue: function(inputValue) {
     this.setState({
       inputValue: inputValue
     });
   },
 
-  handleInputValueChange: function (event) {
+  handleInputValueChange: function(event) {
     var inputValue = event.target.value;
     this.setInputValue(inputValue);
   },
 
-  handleFormSubmit: function (event) {
+  handleFormSubmit: function(event) {
     event.preventDefault();
+
     var collectionName = this.state.inputValue;
-    this.props.onChangeCollectionName(collectionName);
+    CollectionActionCreators.setCollectionName(collectionName);
+    this.props.onCancelCollectionNameChange();
   },
 
-  handleFormCancel: function (event) {
+  handleFormCancel: function(event) {
     event.preventDefault();
-    var collectionName = this.props.name;
+
+    var collectionName = CollectionStore.getCollectionName();
     this.setInputValue(collectionName);
     this.props.onCancelCollectionNameChange();
   },
 
-  componentDidMount: function () {
+  componentDidMount: function() {
     this.refs.collectionName.focus();
   },
 
-  render: function () {
+  render: function() {
     return (
       <form className="form-inline" onSubmit={this.handleSubmit}>
         <Header text="Collection name:" />
